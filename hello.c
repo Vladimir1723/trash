@@ -6,10 +6,12 @@
 
 #define SIZE 1000000
 
+
 void foo(void)	{
 	for (int fahr = LOWER; fahr < UPPER; fahr += STEP)
 		printf("%3d\t%6.1f\n", fahr, (5.0/9.0) * (fahr - 32));
 }
+
 
 void size_of(void)	{
 	char* str = "ssdskj";
@@ -22,14 +24,14 @@ void size_of(void)	{
 	printf("size of unsigned long long%d\n", sizeof(unsigned long long));
 }
 
+// подсчет табуляций, пробелов и переносов строки:
 void tabs_spaces_ (void)	{
 	int count_n = 0, count_t = 0, count_s = 0;
 	int i;
-	while ( (i = getchar()) != EOF )	{
+	while ( (i = getchar()) != 'q' )	{
 		if (i == '\n')	++count_n;
 		else if (i == '\t') ++count_t;
 		else if (i == ' ')	++count_s;
-		else if (i == 'q') break;
 	}
 	
 	printf("Line feeds: %d\n", count_n);
@@ -37,6 +39,7 @@ void tabs_spaces_ (void)	{
 	printf("Spaces: %d\n", count_s);
 }
 
+// замена нескольких пробелов на один
 void spaces_ (void)	{
 	int symbol;
 	int count_s = 0;
@@ -55,6 +58,7 @@ void spaces_ (void)	{
 	}
 }
 
+
 void substitution (void)	{
 	int symbol;
 	while ( (symbol = getchar()) != 'q' )	{
@@ -69,9 +73,11 @@ void substitution (void)	{
 	}
 }
 
+
 #define IN 1
 #define OUT 0
 
+// количество слов, строк, символов
 void words_counter	(void)	{
 	int c,
 		nc = 0, nw = 0, nl = 0,
@@ -92,6 +98,7 @@ void words_counter	(void)	{
 	printf("symbols: %d\twords: %d\tlines: %d\n", nc, nw, nl);	
 }
 
+// по одному слову на каждую строку
 void n_words (void)	{
 	int symbol, count_s = 0, count_t;
 	while ( (symbol = getchar()) != 'q' )	{
@@ -116,6 +123,7 @@ void n_words (void)	{
 	}
 }
 
+// подсчет терминаторов, цифр и прочих символов
 void terms_digit_other	(void)	{
 	int c, nwhite = 0, nother = 0;
 	int ndigit[10] = {[0] = 0};
@@ -132,6 +140,7 @@ void terms_digit_other	(void)	{
 	printf(", symbols-terminators = %d, other = %d\n", nwhite, nother);
 }
 
+// гистограмма длин слов
 void len_of_words (void)	{
 	int c, state = OUT, count = 0;
 	while ( (c = getchar()) != 'q' )	{
@@ -145,6 +154,7 @@ void len_of_words (void)	{
 	}
 }
 
+// гистограмма частот вхождения символов
 void num_of_symbol (void)	{
 	int c, nwhite = 0,
 		nliter[26] = {[0] = 0},
