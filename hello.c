@@ -117,7 +117,7 @@ void n_words (void)	{
 	}
 }
 
-int main(int argc, const char** argv)	{
+void terms_digit_other	(void)	{
 	int c, nwhite = 0, nother = 0;
 	int ndigit[10] = {[0] = 0};
 	while ( (c = getchar()) != 'q' )
@@ -131,5 +131,24 @@ int main(int argc, const char** argv)	{
 	for (int i = 0; i < 10; ++i)
 		printf("%d", ndigit[i]);
 	printf(", symbols-terminators = %d, other = %d\n", nwhite, nother);
+}
+
+void len_of_words (void)	{
+	int c, state = OUT, count = 0;
+	while ( (c = getchar()) != 'q' )	{
+		if (c == ' ' || c == '\t'  || c == '\n')	{
+			for (int i = 0; i < count; ++i)
+				putchar('-');
+			count = 0;
+			putchar('\n');
+		}
+		else ++count;
+	}
+}
+
+int main(int argc, const char** argv)	{
+
+	
+	
 	return 0;
 }
