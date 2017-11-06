@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdbool.h>
 
 #define LOWER 0
 #define UPPER 300
@@ -18,8 +17,8 @@ void size_of(void)	{
 		   sizeof(long), sizeof(int), sizeof(float));
 	printf("size of short:%d\nsize of char:%d\nsize of string:%d\n",
 		   sizeof(short), sizeof(char), sizeof(str));
-	printf("size of double:%d\nsize of long double:%d\nsize of bool:%d\n",
-		   sizeof(double), sizeof(long double), sizeof(bool));
+	printf("size of double:%d\nsize of long double:%d\n",
+		   sizeof(double), sizeof(long double));
 	printf("size of unsigned long long%d\n", sizeof(unsigned long long));
 }
 
@@ -146,9 +145,42 @@ void len_of_words (void)	{
 	}
 }
 
+void num_of_symbol (void)	{
+	int c, nwhite = 0,
+		nliter[26] = {[0] = 0},
+		ndigit[10] = {[0] = 0};
+
+	while ( (c = getchar()) != 'q')	{
+		if (c >= 'a' && c <= 'z')
+			++nliter[c - 'a'];
+		else if (c >= '0' && c <= '9')
+			++ndigit[c - '0'];
+		else if (c == ' ' || c == '\n' || c == '\t')
+			nwhite++;		
+	}
+		
+	printf("liters:\n");
+	for (int i = 0; i < 26; i++)	{
+		printf("%d:\t", nliter[i]);
+		for (int j = 0; j < nliter[i]; j++)
+			putchar('-');
+		putchar('\n');
+	}
+	printf("\ngigits:\n");
+	for (int i = 0; i < 10; i++)	{
+		printf("%d\t", ndigit[i]);
+		for (int j = 0; j < ndigit[i]; j++)
+			putchar('-');
+		putchar('\n');
+	}
+	printf("\nother:\n");
+	for (int i = 0; i < nwhite; i++)
+		putchar('-');
+	printf("\n");
+}
+
 int main(int argc, const char** argv)	{
 
-	
 	
 	return 0;
 }
