@@ -6,6 +6,7 @@
 
 #define SIZE 1000000
 
+#define OF_THE_JEDI 0
 
 void foo(void)	{
 	for (int fahr = LOWER; fahr < UPPER; fahr += STEP)
@@ -191,6 +192,8 @@ void num_of_symbol (void)	{
 
 int main(int argc, const char** argv)	{
 
-	
-	return 0;
+	/**
+	 *	TODO
+	 **/	
+	return OF_THE_JEDI;
 }
