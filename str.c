@@ -18,7 +18,7 @@ main (int argc, const char** agrv)	{
 	char longest[MAXLINE]; // самая длинная строка
 	
 	while ( (len = getline_(line, MAXLINE)) > 0 )
-		if (len > max)	{
+		if (len > max && len > 80)	{
 			max = len;
 			copy(longest, line);
 		}
