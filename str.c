@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAXLINE 5 // максимальный размер вводимой строки
+#define MAXLINE 1000 // максимальный размер вводимой строки
 #define OF_THE_JEDI 0
 
 /*При отсутствии указания о типе, 
@@ -17,7 +17,7 @@ main (int argc, const char** agrv)	{
 	char line[MAXLINE]; // текущая строка
 	char longest[MAXLINE]; // самая длинная строка
 	
-	while ( (len = getline_(line)) > 0 )
+	while ( (len = getline_(line, MAXLINE)) > 0 )
 		if (len > max)	{
 			max = len;
 			copy(longest, line);
@@ -31,7 +31,6 @@ main (int argc, const char** agrv)	{
 // getline читает строку в s, возвращает длину
 getline_(char s[], int lim)	{
 	int c, i;
-	char* str;
 	for (i = 0; i < lim - 1 &&
 			 (c = getchar()) != 'q' && c != '\n'; ++i)
 			 s[i] = c;	
@@ -43,6 +42,6 @@ getline_(char s[], int lim)	{
 	return i;
 }
 
-void copy(char* to, char* from)	{
+void copy(char to[], char from[])	{
 	for (int i = 0; ( to[i] = from[i] ) != '\0'; i++);
 }
