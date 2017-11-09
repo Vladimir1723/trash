@@ -2,42 +2,41 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 #define OF_THE_JEDI 0 
 #define MAXSIZE 1000
 
-
 void manipulation (char *str, const int length)
 {
-	for (int i = 0; str[i] != '\0'; i++)
+	for (int i = 0; *(str + i) != '\0'; i++)
 	{
-		if (str[i] == '\t')
+		if (*(str + i) == '\t')
 		{
-			str[i] = ' ';
+			*(str + i) = ' ';
 	   	}
 	}
-  	char str2[MAXSIZE] = { [0] = 0 };
+  	char *str2 = malloc(MAXSIZE);
 	int j = 0;
-	for (int i = 0; str[i] != '\0'; i++)
+	for (int i = 0; *(str + i) != '\0'; i++)
 	{
-		if (str[i] != ' ')
+		if (*(str + i) != ' ')
 		{
-			str2[j++] = str[i];
+			*(str2 + j++) = *(str + i);
 		}
 		else
 		{
-   			while (str[i] == ' ')
+   			while (*(str + i) == ' ')
 				i++;
-			str2[j++] = ' ';
+			*(str2 + j++) = ' ';
 			--i;
 		}
 	}
-	str2[j] = '\0';
-	for (int i = 0; str2[i] != '\0'; i++)
+	*(str2 + j) = '\0';
+	for (int i = 0; *(str2 + i) != '\0'; i++)
 	{
-		str[i] = str2[i];
+		*(str + i) = *(str2 + i);
 	}
-	str[j] = '\0';
+	*(str + j) = '\0';
+	free(str2);
 }
 
 
@@ -46,34 +45,47 @@ int input (char *str)
 	int c, i = 0;
 	while ( (c = getchar())	!= '\n')
 	{
-		str[i++] = c;
+		*(str + i++) = c;
 	}
-	if (i == 1 && str[0] == 'q')
+	if ( i == 1 && *(str) == 'q' )
 	{
-		return 1;
+		return 'q';
 	}
-	str[i] = '\0';
+	else if (i == 0)
+	{
+		return '\n';
+	}
+	*(str + i) = '\0';
 	return 0;
 }
 
 int main (int argc, char** argv)
 {
-	char str[2][MAXSIZE];
-	for (int i = 0; i < 2; i++)
+	int size = 0;
+	printf("How many lines?\n");
+	scanf("%d", &size);
+	char (*str)[MAXSIZE] = malloc(size + 1);
+	for (int i = 0; i < size + 1; i++)
 	{
-		if (input(str[i]) == 1)
+		int flag = input(*(str + i));
+		if (flag == 'q')
 		{
-			break;
+			return OF_THE_JEDI;
+		}
+   		if (flag == '\n')
+		{
+			(*(str + i))[0] = '\0';
 		}
  	}
-	for (int i = 0; i < 2; i++)
+	printf("\n");
+	for (int i = 0; i < size + 1; i++)
 	{
-		if (str[i][0] != '\n' && str[i][0] !='q' )
+		if ( (*(str + i))[0] != '\0' )
 		{
-			manipulation(str[i], strlen(str[i]));
-			printf("%s\n", str[i]);
+			manipulation( *(str + i), strlen(*(str + i)) );
+			printf("%s\n", *(str + i));
 		}
 	}
- label:
+	free(str);
 	return OF_THE_JEDI;
 }
