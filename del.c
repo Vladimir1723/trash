@@ -5,6 +5,11 @@
 #define OF_THE_JEDI 0 
 #define MAXSIZE 1000
 
+/*
+This program in each input line replaces the ones standing in a row
+spaces and tabs for one space and removes empty lines.
+*/
+
 void manipulation (char *str, const int length)
 {
 	for (int i = 0; *(str + i) != '\0'; i++)
