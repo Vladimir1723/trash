@@ -2,35 +2,44 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 #define OF_THE_JEDI 0 
 #define MAXSIZE 1000
 
+
 void manipulation (char *str, const int length)
 {
-	char str2[MAXSIZE] = { [0] = 0 };
-	int i;
-	for (i = 0; i < length; i++)
+	for (int i = 0; str[i] != '\0'; i++)
 	{
 		if (str[i] == '\t')
-		{		
-			str2[i] = ' ';
-		}
-		else if (str[i] == ' ' && str[i + 1] == ' ')
 		{
-				// TODO
-		}	// TODO
+			str[i] = ' ';
+	   	}
+	}
+  	char str2[MAXSIZE] = { [0] = 0 };
+	int j = 0;
+	for (int i = 0; str[i] != '\0'; i++)
+	{
+		if (str[i] != ' ')
+		{
+			str2[j++] = str[i];
+		}
 		else
 		{
-			str2[i] = str[i];
+   			while (str[i] == ' ')
+				i++;
+			str2[j++] = ' ';
+			--i;
 		}
 	}
-	int length2 = strlen(str2);
-	for (i = 0; i < length2; i++)
+	str2[j] = '\0';
+	for (int i = 0; str2[i] != '\0'; i++)
 	{
 		str[i] = str2[i];
 	}
-	str[i] = '\0';
+	str[j] = '\0';
 }
+
 
 int input (char *str)
 {
