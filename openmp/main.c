@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <omp.h>
+
+#include <math.h>
+#include <time.h>
+
+int foo (void) {
+    int i, nthreads;
+    clock_t clock_timer;
+    double wall_timer, c[1000000]; 
+    for (nthreads = 1; nthreads <=4; ++nthreads) {
+        clock_timer = clock();
+        wall_timer = omp_get_wtime();
+        #pragma omp parallel for private(i) num_threads(nthreads)
+        for (i = 0; i < 1000000; i++) 
+          c[i] = sqrt(i * 4 + i * 2 + i); 
+		printf("Threads: %i time on clock(): %f time on wall: %f\n",
+			   nthreads, (double)(clock() - clock_timer) / CLOCKS_PER_SEC,
+			   omp_get_wtime() - wall_timer);
+    }
+	return 0;
+}
+
+int main (int argc, char *argv[])	{
+
+	/*omp_set_num_threads(3);
+#pragma omp parallel
+	printf("Hello, World!\n");
+	*/
+	foo();
+	return 0;
+}
